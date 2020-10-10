@@ -14,8 +14,11 @@
 
     <div class="row">
     <div class="column">
-        <button onclick="event_click()" id=1>Click me</button> </br>
-    <button onclick="end()" id=1>End</button> </br>
+        <button onclick="event_click('EVENT_1')">EVENT 1</button> </br>
+        <button onclick="event_click('EVENT_2')">EVENT 2</button> </br>
+        <button onclick="event_click('EVENT_3')">EVENT 3</button> </br>
+
+    <!-- <button onclick="end()">End</button> </br> -->
 
     </div>
     <div class="column">
@@ -26,18 +29,13 @@
     </div>
 
 
-    
-
-
-    <p>Select local CSV File:</p>
-
-    
+    <p>CSV with device results:</p>
 
     <input id="csv" type="file">
-    
+<!--     
     <output id="out">
         file contents will appear here
-    </output>
+    </output> -->
     
     
     <script src="script.js"></script>
