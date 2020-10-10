@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="styles.css">
+
+    <button onclick="new_badanie()">Nowe badanie</button> </br>
+    
+    <h2>Badanie</h2>
+
+    <div class="row">
+    <div class="column">
+        <button onclick="event_click()" id=1>Click me</button> </br>
+    <button onclick="end()" id=1>End</button> </br>
+
+    </div>
+    <div class="column">
+        <h3>Current events:</h3>
+        <ul id="events_list">
+        </ul>
+    </div>
+    </div>
+
+
+    
+
+
+    <p>Select local CSV File:</p>
+
+    
+
+    <input id="csv" type="file">
+    
+    <output id="out">
+        file contents will appear here
+    </output>
+    
+    
+    <script src="script.js"></script>
+    <script src="jquery.csv.min.js"></script>
+
+</body>
+</html>
