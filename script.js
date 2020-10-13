@@ -1,13 +1,13 @@
 var fileInput = document.getElementById("csv"),
 
-DELIMITER = "'"
+    DELIMITER = "'"
 SEPARATOR = ';'
 
 events = []
 
-readFile = function () {
+readFile = function() {
     var reader = new FileReader();
-    reader.onload = function () {
+    reader.onload = function() {
         data = $.csv.toArrays(reader.result, {
             delimiter: DELIMITER, // Sets a custom value delimiter character
             separator: SEPARATOR, // Sets a custom field separator character
@@ -16,18 +16,16 @@ readFile = function () {
         data[0].push('event_timestamp')
         current_event_index = 0
         if (events.length != 0) {
-            for (x=1; x<data.length; x++) {
+            for (x = 1; x < data.length; x++) {
                 current_event = events[current_event_index]
                 try {
                     if (parseFloat(data[x][0]) > current_event.timestamp) {
                         if (x == 1) {
                             data[1].push(current_event.name);
-                        }
-                        else if (Math.abs(parseFloat(data[x][0]) - current_event.timestamp) < Math.abs(parseFloat(data[x-1][0]) - current_event.timestamp)) {
+                        } else if (Math.abs(parseFloat(data[x][0]) - current_event.timestamp) < Math.abs(parseFloat(data[x - 1][0]) - current_event.timestamp)) {
                             data[x].push(current_event.name);
-                        }
-                        else {
-                            data[x-1].push(current_event.name);
+                        } else {
+                            data[x - 1].push(current_event.name);
                         }
                         current_event_index++;
                     }
@@ -39,7 +37,7 @@ readFile = function () {
 
         // Zakladamy, ze moze byc tylko jeden event na samym koncu
         if (current_event_index != events.length) {
-            data[data.length-1].push(events[current_event_index].name)
+            data[data.length - 1].push(events[current_event_index].name)
         }
         csv = $.csv.fromArrays(data, {
             delimiter: DELIMITER,
@@ -52,27 +50,32 @@ readFile = function () {
 };
 
 function download(data, filename, type) {
-    var file = new Blob([data], {type: type});
+    var file = new Blob([data], {
+        type: type
+    });
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
     else { // Others
         var a = document.createElement("a"),
-                url = URL.createObjectURL(file);
+            url = URL.createObjectURL(file);
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);
         a.click();
         setTimeout(function() {
             document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);  
-        }, 0); 
+            window.URL.revokeObjectURL(url);
+        }, 0);
     }
 }
-    
+
 
 function event_click(name) {
     timestamp = new Date().getTime()
-    events.push({"name": name, "timestamp": timestamp})
+    events.push({
+        "name": name,
+        "timestamp": timestamp
+    })
     $("#events_list").append(`<li>${name} : ${timestamp}</li>`);
 }
 
@@ -90,4 +93,4 @@ function new_badanie() {
 fileInput.addEventListener('change', readFile);
 
 
-console.log(Math.round(new Date().getTime()/1000));
+console.log(Math.round(new Date().getTime() / 1000));
